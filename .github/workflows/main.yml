@@ -37,5 +37,5 @@ jobs:
       - name: Copy files to /var/www
         run: |
           cp -r ./* $PROJECT_DIR
-          cd $PROJECT_DIR/server
-          pm2 start process.json
+          # cd $PROJECT_DIR/server
+          # pm2 start process.json
