@@ -28,6 +28,7 @@ jobs:
           npm run build
   
   deploy: 
+    needs: [build]
     env: 
       PROJECT_DIR: /var/www/covid-tracker
     runs-on: self-hosted 
