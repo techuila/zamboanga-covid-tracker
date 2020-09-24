@@ -24,7 +24,7 @@ jobs:
 
       - name: Build vue.js app
         run: |
-          cd ../client
+          cd client
           npm run build
   
   deploy: 
@@ -36,6 +36,6 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          sudo cp -r ./* $PROJECT_DIR
+          cp -r ./* $PROJECT_DIR
           cd $PROJECT_DIR/server
           pm2 start process.json
