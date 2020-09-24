@@ -1,14 +1,16 @@
 <template>
   <b-sheet id="bottom-sheet" :style="{ zIndex: 9999 }" :barColor="'#FEFEFE'" :defaultState="'half'">
-    <!-- Info header -->
-    <div class="header">
-      <div class="info">
-        <helper-card v-for="(info, key) in infos" :info="info" :key="key" />
+    <div :style="{ zIndex: 9999 }">
+      <!-- Info header -->
+      <div class="header">
+        <div class="info">
+          <helper-card v-for="(info, key) in infos" :info="info" :key="key" />
+        </div>
       </div>
-    </div>
 
-    <!-- Main Content -->
-    <content-main />
+      <!-- Main Content -->
+      <content-main />
+    </div>
   </b-sheet>
 </template>
 

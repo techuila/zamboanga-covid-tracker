@@ -43,7 +43,7 @@ html, body, #app, #dashboard {
   #chart svg {
     background: transparent !important;
   }
-  
+
   #dashboard {
     #sidebar {
 

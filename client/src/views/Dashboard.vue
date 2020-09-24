@@ -88,6 +88,27 @@ h1, h2, h3, h4, h5 {
 // Phones
 @media only screen and (max-width: 680px) {
   #dashboard-container {
+    .el-message.el-message--info.is-closable.dashboard-info {
+      top: 0;
+      height: 15px;
+      min-width: 100%
+    }
+
+    #dashboard .header {
+      padding: 34px 24px;
+    }
+
+    #dashboard #map-leaflet {
+      .leaflet-top.leaflet-right {
+        top: 100px !important;
+        left: 22px;
+      }
+
+      .leaflet-top.leaflet-left {
+        left: 20px !important;
+      }
+    }
+
     #dashboard .main.header .info {
       display: none;
     }
@@ -122,6 +143,14 @@ h1, h2, h3, h4, h5 {
 
         .tab-container {
           margin-bottom: 100px;
+
+          .tab-header {
+            padding: 30px 0;    
+          }
+
+          .tab-pane {
+            padding: 0 0 24px 0;
+          }
 
           #chart {
             margin-top: 40px;
