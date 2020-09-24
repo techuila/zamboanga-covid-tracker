@@ -40,3 +40,4 @@ jobs:
           cp -r ./* $PROJECT_DIR
           cd $PROJECT_DIR/server
           pm2 start process.json
+          
