@@ -26,6 +26,12 @@ jobs:
         run: |
           cd client
           npm run build
+
+      - name: Upload dist file 
+        uses: actions/upload-artifact@v2
+        with:
+          name: dist
+          path: client/dist
   
   deploy: 
     needs: [build]
@@ -33,11 +39,13 @@ jobs:
       PROJECT_DIR: /var/www/covid-tracker
     runs-on: self-hosted 
     steps: 
-      - uses: actions/checkout@v2
+      - name: Download dist file from build job
+        uses: actions/download-artifact@v2
+        with:
+          name: dist
 
       - name: Copy files to /var/www
         run: |
           cp -r ./* $PROJECT_DIR
           cd $PROJECT_DIR/server
           pm2 start process.json
-          
