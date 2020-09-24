@@ -37,6 +37,6 @@ jobs:
 
       - name: Copy files to /var/www
         run: |
-          cp -r ./* /var/www/covid-tracker
-          # cd $PROJECT_DIR/server
-          # pm2 start process.json
+          cp -r ./* $PROJECT_DIR
+          cd $PROJECT_DIR/server
+          pm2 start process.json
