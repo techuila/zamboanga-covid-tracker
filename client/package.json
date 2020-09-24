@@ -1,0 +1,45 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.14.0",
+    "@vue/composition-api": "^1.0.0-beta.6",
+    "apexcharts": "^3.19.3",
+    "axios": "^0.19.2",
+    "core-js": "^3.6.5",
+    "element-ui": "^2.13.2",
+    "leaflet": "^1.6.0",
+    "nprogress": "^0.2.0",
+    "register-service-worker": "^1.7.1",
+    "vue": "^2.6.11",
+    "vue-apexcharts": "^1.6.0",
+    "vue-router": "^3.2.0",
+    "vue-swipeable-bottom-sheet": "git+https://github.com/techuila/vue-swipeable-bottom-sheet.git",
+    "vue-trend-chart": "^0.15.2",
+    "vue2-leaflet": "^2.5.2",
+    "vuejs-twitter-feed": "^1.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~4.5.0",
+    "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-pwa": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
+    "@vue/cli-service": "~4.5.0",
+    "@vue/eslint-config-prettier": "^6.0.0",
+    "babel-eslint": "^10.1.0",
+    "element-theme-chalk": "^2.13.2",
+    "eslint": "^6.7.2",
+    "eslint-plugin-prettier": "^3.1.3",
+    "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^4.12.0",
+    "prettier": "^1.19.1",
+    "sass-loader": "^8.0.2",
+    "vue-template-compiler": "^2.6.11"
+  }
+}
