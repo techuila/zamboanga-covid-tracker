@@ -35,6 +35,7 @@ jobs:
     steps: 
       - name: Copy files to /var/www
         run: |
+          rm -rf $PROJECT_DIR/client/dist
           cp -r ./* $PROJECT_DIR
           cd $PROJECT_DIR/server
           pm2 start process.json

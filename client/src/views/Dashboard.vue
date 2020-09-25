@@ -1,7 +1,6 @@
 <template>
   <div id="dashboard-container">
     <div id="dashboard">
-      <div class="content">
         <core-header />
 
         <core-map />
@@ -87,13 +86,14 @@ h1, h2, h3, h4, h5 {
 
 // Phones
 @media only screen and (max-width: 680px) {
-  #dashboard-container {
     .el-message.el-message--info.is-closable.dashboard-info {
       top: 0;
       height: 15px;
       min-width: 100%
     }
 
+    #dashboard-container {
+    
     #dashboard .header {
       padding: 34px 24px;
     }
