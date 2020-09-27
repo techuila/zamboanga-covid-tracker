@@ -1,6 +1,7 @@
 <template>
   <div id="dashboard-container">
     <div id="dashboard">
+      <div class="content">
         <core-header />
 
         <core-map />
@@ -100,8 +101,9 @@ h1, h2, h3, h4, h5 {
 
     #dashboard #map-leaflet {
       .leaflet-top.leaflet-right {
-        top: 100px !important;
         left: 22px;
+        top: 100px !important;
+        right: initial !important;
       }
 
       .leaflet-top.leaflet-left {
