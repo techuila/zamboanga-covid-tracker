@@ -1,26 +1,26 @@
 import inst from 'axios'
 import NProgress from 'nprogress'
-import store from '@/store'
+// import useLoading from '@/composables/useLoading'
 
 let axios = inst.create()
+let requestCount = 0
 
 NProgress.configure({ easing: 'ease', speed: 500 })
 
-axios.interceptors.request.use(config => {
-  const { requestCount } = store.state.loading
+// const { requestCount, setRequestCount } = useLoading()
 
+axios.interceptors.request.use(config => {
   if (requestCount === 0) {
     NProgress.start()
   }
 
-  store.commit('setRequestCount', true)
+ requestCount++
 
   return config
 })
 
 axios.interceptors.response.use(response => {
-  store.commit('setRequestCount', false)
-  const { requestCount } = store.state.loading
+  --requestCount
 
   if (requestCount === 0) {
     NProgress.done()
@@ -28,5 +28,5 @@ axios.interceptors.response.use(response => {
   return response
 })
 
-// Vue.prototype.$axios = axios
+// // Vue.prototype.$axios = axios
 export default axios

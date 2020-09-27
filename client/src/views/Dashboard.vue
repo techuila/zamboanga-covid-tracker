@@ -25,7 +25,7 @@ export default {
       root.$message({
         duration: 0,
         showClose: true,
-        message: 'Site is still under development',
+        message: "This is just a personal project, I only used dummy data since I couldn't find a specific data that I need for this project.",
         customClass: 'dashboard-info'
       });
 
@@ -42,6 +42,14 @@ export default {
   display: flex;
   position: relative;
   flex-direction: column;
+
+  #twitter-widget-1 {
+    z-index: 9999;
+  }
+  
+  .el-radio-button__inner {
+      width: 100%;
+    }
 
   #dashboard {
     flex-grow: 1;

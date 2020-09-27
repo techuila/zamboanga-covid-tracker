@@ -1,24 +1,34 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const models = require('../models');
+const router = express.Router();
 
-module.exports = ({ database, auth }) => {
-  const patients = database.collection('patients')
+router.get('/', async (req, res) => {
+  try {
+    res.send(
+      await models.Patient.findAll({ order: [['date_created', 'DESC']] })
+    );
+  } catch (error) {
+    res.status(400).json({ msg: error });
+  }
+});
 
-  router.get('/', auth, async (req, res) => {
-    res.send(await patients.find().toArray((err, res) => {
-      if (err)  throw err
-      console.log('patients')
-      database.close()
-    }))
-  })
+router.put('/:id', async (req, res) => {
+  try {
+    const id = req.params.id;
 
-  router.post('/', auth, async (req, res) => {
-    await patients.insertOne(req.body, (err, res) => {
-      if (err)  throw err
+    const data = await models.upsert(
+      models.Content,
+      { id, ...req.body },
+      null,
+      async (values) => {
+        await models.upsert(models.Log, { patient_id: id, ...values });
+      }
+    );
 
-      database.close()
-    })
-  })
+    res.send(data);
+  } catch (error) {
+    res.status(400).json({ msg: error });
+  }
+});
 
-  return router
-}
+module.exports = router;

@@ -7,7 +7,7 @@
     </l-control>
 
     <l-control position="bottomRight" class="info legend leaflet-bottom leaflet-right">
-      <!-- <template v-for="(grade, index) in grades">
+      <template v-for="(grade, index) in grades">
         <span :key="index" class="legend-span">
           <i
             :style="{
@@ -30,21 +30,103 @@
 
           <br />
         </span>
-      </template> -->
+      </template>
     </l-control>
 
-    <!-- <l-geo-json
+    <l-geo-json
       ref="geomap"
-      :geojson="geojson"
       :options="options"
+      :geojson="geojson"
       :options-style="styleFunction"
-    /> -->
+    />
   </l-map>
 </template>
 
 <script>
+import { reactive, toRefs, computed, watch } from '@vue/composition-api';
+import useMap from '@/composables/useMap'
+
+const highlightFeature = e => (info, props) => {
+  var layer = e.target
+  layer.setStyle({
+    weight: 4,
+    fillOpacity: 0.7
+  })
+
+  info.update(props)
+}
+
+const resetHighlight = e => info => {
+  e.target.setStyle({ weight: 2, fillOpacity: 0.4 })
+
+  info.update()
+}
+
+const zoomToFeature = e => map => {
+  map.fitBounds(e.target.getBounds())
+}
+
+
+
 export default {
-  
+  setup() {
+    const { geojson, patients, getColor, grades } = useMap()
+
+    const state = reactive({
+      geomap: null,
+      map: null,
+      info: null,
+      fillColor: '#4099FF',
+      styleFunction: computed(() => ({ properties }) => {
+        const fillColor = properties.fillColor || state.fillColor // important! need touch fillColor in computed for re-calculate when change fillColor
+
+        return {
+          weight: 2,
+          color: '#CCCCCC',
+          fillColor: fillColor,
+          fillOpacity: 0.4
+        }
+      }),
+      options: computed(() => ({
+        onEachFeature: (feature, layer) => {
+          layer.on({
+            mouseover: e => highlightFeature(e)(state.info, feature.properties),
+            mouseout: e => resetHighlight(e)(state.info),
+            click: e => zoomToFeature(e)(state.map)
+          })
+        }
+      }))
+    })
+
+    watch(
+      () => state.info,
+      () => {
+        if (state.info) {
+          state.info.update = function(props) {
+            const info_el = document.getElementById('control-info')
+            info_el.style = `text-align: ${props ? 'left' : 'center'}`
+            info_el.innerHTML =
+              '<h4>Zamboanga City</h4>' +
+              (props
+                ? '<b>' +
+                  props.name +
+                  '</b><br />' +
+                  'Confirmed: <span style="color: red">' +
+                  (props.confirmed || 0) +
+                  '</span><br />'
+                : 'Hover over a barangay')
+          }
+        }
+      }
+    )
+      
+    return {
+      ...toRefs(state),
+      geojson,
+      grades,
+      getColor,
+    }
+  }
 }
 </script>
 

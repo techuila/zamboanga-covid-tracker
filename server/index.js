@@ -1,40 +1,36 @@
-const express = require('express'),
-      MongoClient = require('mongodb').MongoClient,
-      client = require('socket.io').listen(4000).sockets,
-      auth = require('./middleware/auth'),
-      PORT = process.env.PORT || 8082,
-      app = express(),
-      path = require('path')
+'use strict';
+const express = require('express');
+const path = require('path');
+const cors = require('cors');
+const port = process.env.PORT || 8082;
+const app = express();
+require('dotenv').config();
 
-require('dotenv').config()
-
-app.use(express.json());
+// Cors
+app.use(cors());
+// BodyparserMiddleware
 app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+app.get('/', (req, res) => {
+  res.send('Database is alive');
+});
+// app.use(formidable())
 
-// Connection URL
-const db_url = 'mongodb://localhost:27017'
+// Set up routes
+app.use('/v1/api/patients', require('./routes/patients'));
+app.use('/v1/api/logs', require('./routes/logs'));
 
-MongoClient.connect(db_url, { useUnifiedTopology: true }, (err, db) => { 
-  if (err)  throw err
-
-  console.log(`MongoDB: Connected to database...`)
-
-  // Initialize routes and pass params (router, database, socket)
-  require('./routes')({app, database: db.db('covidtracker'), client, auth})
-  // app.use('/users', require('./routes/users')({ app, router: express.Router(), database: db.db('covidtracker'), client, auth }))
-  // app.use('/patients', require('./routes/patients')({ app, router: express.Router(), database: db.db('covidtracker'), client, auth }))
-  // app.use('/', (req, res) => res.send('Server is alive...'))
-
-})
+app.get('/geojson.json', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './scripts/geojson.json'));
+});
 
 if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.resolve(__dirname, "../client/dist")));
-
-  app.get("/*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "../client/dist/index.html"));
+  app.get('/*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
   });
 }
 
-app.listen(PORT, () => { 
-  console.log(`🚀 Server running on port ${PORT} in ${process.env.NODE_ENV} mode`) 
-})
+// Assign port
+app.listen(port, () =>
+  console.log(`Running on port ${port} in ${process.env.NODE_ENV} mode`)
+);
