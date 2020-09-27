@@ -70,7 +70,7 @@ const zoomToFeature = e => map => {
 
 export default {
   setup() {
-    const { geojson, patients, getColor, grades } = useMap()
+    const { geojson, getColor, grades } = useMap()
 
     const state = reactive({
       geomap: null,

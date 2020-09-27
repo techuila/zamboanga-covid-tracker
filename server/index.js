@@ -11,9 +11,9 @@ app.use(cors());
 // BodyparserMiddleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
-app.get('/', (req, res) => {
-  res.send('Database is alive');
-});
+// app.get('/', (req, res) => {
+  // res.send('Database is alive');
+// });
 // app.use(formidable())
 
 // Set up routes
