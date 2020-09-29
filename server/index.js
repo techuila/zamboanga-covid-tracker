@@ -17,16 +17,17 @@ app.use(express.json());
 // app.use(formidable())
 
 // Set up routes
-app.use('/v1/api/patients', require('./routes/patients'));
-app.use('/v1/api/logs', require('./routes/logs'));
+app.use('/api/patients', require('./routes/patients'));
+app.use('/api/logs', require('./routes/logs'));
 
-app.get('/geojson.json', (req, res) => {
+app.get('/assets/geojson.json', (req, res) => {
   res.sendFile(path.resolve(__dirname, './scripts/geojson.json'));
 });
 
 if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.resolve(__dirname, '../client/dist')))
   app.get('/*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+    res.sendFile(path.resolve(__dirname, '../client/dist/index.html'));
   });
 }
 

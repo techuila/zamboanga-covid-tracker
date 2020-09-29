@@ -5,10 +5,10 @@ console.log(process.env.NODE_ENV);
 switch (process.env.NODE_ENV) {
   case 'maintainance':
   case 'production':
-    sequelize = new Sequelize('exactplace2', 'exact', '2GrD7M7KKPZCkCA6', {
+    sequelize = new Sequelize('covid_tracker', 'root', '', {
       dialect: 'mysql',
-      host: 'exactconstruct.synology.me',
-      port: 3307,
+      host: 'localhost',
+      port: 3306,
       retry: {
         match: [
           /ETIMEDOUT/,
