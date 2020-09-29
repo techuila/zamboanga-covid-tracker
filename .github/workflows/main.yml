@@ -9,6 +9,8 @@ on:
 jobs:
   build:
     runs-on: self-hosted
+    env: 
+      PORT: 8082
     steps:
       - uses: actions/checkout@v2
 
@@ -30,10 +32,10 @@ jobs:
           npm run build
   
   deploy: 
+    runs-on: self-hosted 
     needs: [build]
     env: 
       PROJECT_DIR: /var/www/covid-tracker
-    runs-on: self-hosted 
     steps: 
       - name: Copy files to /var/www
         run: |
