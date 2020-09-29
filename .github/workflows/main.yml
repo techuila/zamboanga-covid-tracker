@@ -10,7 +10,7 @@ jobs:
   build:
     runs-on: self-hosted
     env: 
-      PORT: 8082
+      PORT_PROD: 8082
     steps:
       - uses: actions/checkout@v2
 
