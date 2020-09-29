@@ -5,7 +5,7 @@ console.log(process.env.NODE_ENV);
 switch (process.env.NODE_ENV) {
   case 'maintainance':
   case 'production':
-    sequelize = new Sequelize('covid_tracker', 'root', '', {
+    sequelize = new Sequelize('covid_tracker', 'techiula', '3JqmngNhU5w8QzAm', {
       dialect: 'mysql',
       host: 'localhost',
       port: 3306,
