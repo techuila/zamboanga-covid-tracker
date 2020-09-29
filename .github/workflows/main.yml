@@ -14,7 +14,7 @@ jobs:
 
       - name: Prepare process.json for PM2
         run: |
-          / var/www/scripts/env.sh master server/
+          /var/www/scripts/env.sh master server/
           /var/www/scripts/process.sh Covid-Tracker server/
 
       - name: Install npm packages
